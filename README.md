@@ -44,8 +44,8 @@ provided by the user and generates a single script that can be used
 to generate RNC models.
 
 *********************************************************************
-YOU WILL NEED TO EDIT THE EXAMPLES TO ADD IN CORRECT PATHS FOR THE
-LOCATION OF THE CODE, THE RIBOSOME STRUCTURE, THE DIPEPTIDE LIBRARIES
+note that you will need to edit the command line arguments in the examples
+to reflect the paths to the various folders on your system...
 *********************************************************************
 
 successful execution of the make_comfile...exe code will generate a
