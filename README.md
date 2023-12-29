@@ -1,7 +1,7 @@
 # AutoRNC
 Fortran package for generating ribosome nascent-chain models
 
-Installation instructions:
+**Installation instructions:**
 
 untar the AutoRNC .tar file and compile all the code:
 -----------------------------------------------------
