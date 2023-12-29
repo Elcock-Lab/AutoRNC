@@ -1,0 +1,59 @@
+
+here we will attempt to remodel L24 to allow nascent chains easier exits:
+-------------------------------------------------------------------------
+
+extract all coords of L24 and change to "ATOM" entries:
+-------------------------------------------------------
+
+grep " l " RIBOSOME.pdb > L24_iter0.pdb
+sed -i 's/HETATM/ATOM  /' L24_iter0.pdb
+
+make a copy that removes residues 45-56:
+----------------------------------------
+
+cp L24_iter0.pdb L24_iter1_beg.pdb
+vi L24_iter1_beg.pdb
+
+make a copy that includes *only* residues 48-53:
+------------------------------------------------
+
+cp L24_iter0.pdb L24_iter1_dum.pdb
+vi L24_iter1_dum.pdb
+
+change these to chain "m" instead of "l"
+
+cat those residues on to the end of the L24:
+--------------------------------------------
+
+cat L24_iter1_dum.pdb >> L24_iter1_beg.pdb
+
+now find all other ribosome atoms that are nearby:
+--------------------------------------------------
+
+/home/aelcock/CURRENT_CODES/keep_close_atoms_for_loopy_L24.exe L24_iter1_beg.pdb RIBOSOME.pdb fake_gly.pdb 20.0 x
+
+and cat those residues on also:
+-------------------------------
+
+cat fake_gly.pdb >> L24_iter1_beg.pdb
+
+now attempt to run loopy:
+-------------------------
+
+cp /home/LAB/loopy/test/model.dir .
+
+/home/LAB/loopy/test/loopy -o=45-56 -c=l -t=b -s=c -r=QKPVPALNQPGG L24_iter1_beg.pdb
+
+--> L24_iter1_beg_looper_0.pdb
+
+this looks good: the loop is now folded back, making it look like the "lid" that
+L24 normally forms on the top of the tunnel has been lifted back...
+
+now cut out residues 45-56 from the loopy structure and put them into RIBOSOME.pdb:
+-----------------------------------------------------------------------------------
+
+cp L24_iter1_beg_looper_0.pdb tmp.pdb
+vi RIBOSOME.pdb 
+
+(need to change ATOM to HETATM and change beta/occupancy values also)
+

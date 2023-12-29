@@ -1,0 +1,45 @@
+
+note that each folder already contains an input file for AHEMODEL:
+------------------------------------------------------------------
+
+input_file_for_ahemodel_v4.7_NASCENT
+
+get the ribosome pdb structure in tar'd gzip'd form:
+----------------------------------------------------
+
+wget https://files.rcsb.org/pub/pdb/compatible/pdb_bundle/oi/7oiz/7oiz-pdb-bundle.tar.gz
+
+gunzip 7oiz-pdb-bundle.tar.gz
+tar -xvf 7oiz-pdb-bundle.tar
+
+process it to make RIBOSOME.pdb:
+-----------------------------------------
+
+grep '^ATOM' 7oiz-pdb-bundle1.pdb  > TEMPORARY.pdb
+grep '^ATOM' 7oiz-pdb-bundle2.pdb >> TEMPORARY.pdb
+grep '^HETA' 7oiz-pdb-bundle1.pdb >> TEMPORARY.pdb
+grep '^HETA' 7oiz-pdb-bundle2.pdb >> TEMPORARY.pdb
+
+/home/aelcock/CURRENT_CODES/clean_up_pdb_prior_ahemodel_2019.exe TEMPORARY.pdb TEMPLATE_ahemodel.tmp 7OIZ > temp
+/home/aelcock/CURRENT_CODES/keep_only_true_HETATM_entries.exe 7oiz-pdb-bundle1.pdb HETATM1.pdb
+/home/aelcock/CURRENT_CODES/keep_only_true_HETATM_entries.exe 7oiz-pdb-bundle2.pdb HETATM2.pdb
+cat HETATM1.pdb >> TEMPLATE_ahemodel.tmp
+cat HETATM2.pdb >> TEMPLATE_ahemodel.tmp
+
+make a final RIBOSOME.pdb without nascent chain "x":
+----------------------------------------------------
+
+grep "^ATOM"        TEMPLATE_ahemodel.tmp | grep -v ".\{21\}x" >  RIBOSOME.pdb
+grep "^HETA"        TEMPLATE_ahemodel.tmp                      >> RIBOSOME.pdb
+sed -i 's/^ATOM  /HETATM/' RIBOSOME.pdb
+
+get the nascent chain "x" coordinates in a separate pdb:
+--------------------------------------------------------
+
+grep "^ATOM"        TEMPLATE_ahemodel.tmp | grep ".\{21\}x"    >  NASCENT_CTERMINUS.pdb
+
+remove temporary files:
+-----------------------
+
+rm TEMP_* SEQRES.tmp temp TEMPORARY.pdb HETATM1.pdb HETATM2.pdb TEMPLATE_ahemodel.tmp
+

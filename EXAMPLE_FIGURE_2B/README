@@ -1,0 +1,66 @@
+
+this folder contains 2 files necessary for building the construct shown in Figure 2B of the paper:
+--------------------------------------------------------------------------------------------------
+
+[1] P12345.fasta         - sequence of the construct
+[2] list_of_ss_elems     - file listing secondary structure elements to include in models
+
+note that P12345.pdb and list_of_bloks are not applicable in this case...
+
+make the comfile that should allow us to build this structure:
+--------------------------------------------------------------
+
+note that in the following command - (which is admittedly on the long side...) - all paths
+that are user-provided must be preceded and ended by \' characters - this involves the
+arguments [6], [7], [8], and [9] - I know this is an inconvenience, but it's done so that
+Fortran can read the paths correctly without getting screwed up by the '/' symbol
+
+/home/aelcock/2023_ECOLI_CELL/AutoRNC/AutoRNC_FOR_RELEASE_v1.0/SOURCE/make_comfile_AHEMODEL_nascent_chains_for_release_final_2023.exe P12345  56  55 list_of_bloks list_of_ss_elems \'/home/aelcock/2023_ECOLI_CELL/AutoRNC/AutoRNC_FOR_RELEASE_v1.0/5UYM_L24/\' \'/home/aelcock/2023_ECOLI_CELL/AutoRNC/AutoRNC_FOR_RELEASE_v1.0/EXAMPLE_FIGURE_2B/\' \'/home/aelcock/2023_ECOLI_CELL/AutoRNC/AutoRNC_FOR_RELEASE_v1.0/SOURCE/\' \'/home/aelcock/2023_ECOLI_CELL/AutoRNC/AutoRNC_FOR_RELEASE_v1.0/PISCES/DIPEPTIDES/\'  0  1  yes  2.00  3.00  5  1
+
+--> comfile_build_nascent_chain
+
+(this will take only about a second to complete)
+
+arguments:
+
+[ 1] name of .fasta
+[ 2] total # residues (in this example, 56)
+[ 3] build from residue # (in this example, 55 since residue 56 is resolved in 5UYM_L24; SEE BELOW)
+[ 4] list_of_bloks   (tertiary structure)
+[ 5] list_of_ss_elems (secondary structure)
+[ 6] path to ribosome structure template
+[ 7] path to protein info (usually this folder)
+[ 8] path to codes
+[ 9] path to dipeptide libraries
+[10] sidechain_mode =0 for all-atom ; =1 for C-beta only ; =2 for C-alpha only
+[11] nmodels desired
+[12] yes/no to use ribosome
+[13] intra-chain clash distance
+[14] inter-chain clash distance
+[15] nbacktrack
+[16] iblock: if >0 then add blocking atoms around the iblock'th res of nascent chain
+
+arguments 2 and 3 will have the following relationships for the various templates:
+
+for 5UYM: arg#3 = ( arg#2 -  1 )
+for 3JBV: arg#3 = ( arg#2 - 17 )
+for 7OIZ: arg#3 = ( arg#2 - 16 )
+
+this is because each of these ribosome templates has a different number of
+resolved residues at the C-termini of their nascent chains.
+ 
+then run the comfile thus:
+--------------------------
+
+nohup ./comfile_build_nascent_chain &
+
+you can monitor progress by doing:
+----------------------------------
+
+tail -f nohup.out
+
+the final RNC structures will be in:
+------------------------------------
+
+AHEMODEL_001/P12345.AHEMODEL.pdb
+

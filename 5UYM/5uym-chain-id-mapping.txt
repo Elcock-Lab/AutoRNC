@@ -1,0 +1,65 @@
+    New chain ID            Original chain ID
+
+5uym-pdb-bundle1.pdb:
+           A                        04
+           B                        05
+           C                        06
+           D                        07
+           E                        08
+           F                        09
+           G                        10
+           H                        11
+           I                        12
+           J                        13
+           K                        14
+           L                        15
+           M                        16
+           N                        17
+           O                        18
+           P                        19
+           Q                        20
+           R                        21
+           S                        22
+           T                        23
+           U                        24
+           V                        25
+           W                        26
+           X                        27
+           Y                        28
+           Z                        29
+           a                        30
+           b                        31
+           c                        32
+           d                        33
+           e                        34
+           f                         B
+           g                         C
+           h                         D
+           i                         E
+           j                         F
+           k                         G
+           l                         H
+           m                         I
+           n                         J
+           o                         K
+           p                         L
+           q                         M
+           r                         N
+           s                         O
+           t                         P
+           u                         Q
+           v                         R
+           w                         S
+           x                         T
+           y                         U
+           z                        03
+           0                         A
+
+5uym-pdb-bundle2.pdb:
+           A                        01
+           B                        02
+           C                         X
+           D                         V
+           E                         W
+           F                         Y
+           G                         Z

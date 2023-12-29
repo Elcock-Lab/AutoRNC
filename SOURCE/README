@@ -1,0 +1,11 @@
+
+to compile all of the codes do:
+-------------------------------
+
+for i in *.f ; do gfortran $i -o $i.exe ; done
+
+then rename them from *.f.exe to *.exe using:
+---------------------------------------------
+
+rename .f.exe .exe *exe
+

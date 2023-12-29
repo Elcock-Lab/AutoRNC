@@ -1,0 +1,49 @@
+-----------------------------------------------------------------------------------------------------------------
+ final_filename_stem   separate_hetatms?   use_no_restrict?   sidechain_mode
+ PXXXXX                               no                 no           SCMODE
+-----------------------------------------------------------------------------------------------------------------
+ skip_scwrl?   skip_dssp?   skip_loopy?
+         yes          yes           yes
+-----------------------------------------------------------------------------------------------------------------
+ dipeptide_path (Elcock group location: /home/aelcock/2023_ECOLI_CELL/AutoRNC/AutoRNC_FOR_RELEASE_v1.0/PISCES/DIPEPTIDES)
+ DIPEP_PATH
+-----------------------------------------------------------------------------------------------------------------
+ dssp_path (Elcock group location: /home/LAB/BIN/dssp-2.0.4-linux-amd64)
+ not_needed_for_AutoRNC
+-----------------------------------------------------------------------------------------------------------------
+ emboss_path (Elcock group location: /home/LAB/BIN/EMBOSS-6.6.0/emboss/needle)
+ not_needed_for_AutoRNC
+-----------------------------------------------------------------------------------------------------------------
+ promals_path (Elcock group location: /home/LAB/BIN/promals_package/bin/promals)
+ not_needed_for_AutoRNC
+-----------------------------------------------------------------------------------------------------------------
+ scwrl_path (Elcock group location: /home/LAB/scwrl4/Scwrl4)
+ not_needed_for_AutoRNC
+-----------------------------------------------------------------------------------------------------------------
+ loopy_path (Elcock group location: /home/LAB/loopy/test/loopy)
+ not_needed_for_AutoRNC
+-----------------------------------------------------------------------------------------------------------------
+ code_path
+ CODE_PATH
+-----------------------------------------------------------------------------------------------------------------
+ score_cut  rms_crit  clash_intra clash_inter  nfails_chn_max  nfails_res_max  continue_regardless
+     -10.0      0.50      D_INTRA     D_INTER              -1             250                  yes
+-----------------------------------------------------------------------------------------------------------------
+ align_mode membrane_dive use_SS_constraints dssp_types rebuild_tails truncate_tails  skip_all_loops
+          3            no                 no         HE           yes             no              no
+-----------------------------------------------------------------------------------------------------------------
+ nmodels_desired  nloopy_confs  min_loop_size  truncate_template  rosetta_symmetry  nrelax  frelax
+         NMODELS            10              6                 no               yes      10    0.75
+-----------------------------------------------------------------------------------------------------------------
+ use_promals3D use_tmalign ss_weight id_thr helix_cut sheet_cut iskiphetcheck nbacktrack nbacktries iworkoutwards
+            no          no     0.200    1.1       0.9       0.9             1      NBACK        100           yes
+-----------------------------------------------------------------------------------------------------------------
+ input_pdb_file
+ TEMPLATE_ahemodel.pdb
+-----------------------------------------------------------------------------------------------------------------
+ input_fasta_stems (separated by spaces)
+ PXXXXX
+-----------------------------------------------------------------------------------------------------------------
+ HETATM residues to omit from clash checking:
+             
+-----------------------------------------------------------------------------------------------------------------

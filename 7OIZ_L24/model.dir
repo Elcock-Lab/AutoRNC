@@ -1,0 +1,13 @@
+PDB: .
+     ./25new_sidechain
+     /hosts/razor/0/databases/pdb/
+     /hosts/dodo/dodo6/xiang/mod_min
+     /hosts/trantor/beorn/hitz_delta/surf/modpdb
+     /hosts/cumbij/usr/people/xiang/pdb_297
+     /hosts/trantor/pdb
+     /hosts/trantor/delta/xiang/mod_min
+     /hosts/trantor/gandalf/people/xiang/charmm
+model library: .
+	       /home/LAB/loopy/model_lib/
+dssp directory:  /hosts/cumbij/usr/people/xiang/dssp             
+bin directory:  /hosts/cumbij/usr/people/xiang/protein/bin

@@ -1,0 +1,54 @@
+
+note that each folder already contains an input file for AHEMODEL:
+------------------------------------------------------------------
+
+input_file_for_ahemodel_v4.7_NASCENT
+
+get the ribosome pdb structure in tar'd gzip'd form:
+----------------------------------------------------
+
+wget https://files.rcsb.org/pub/pdb/compatible/pdb_bundle/uy/5uym/5uym-pdb-bundle.tar.gz
+
+gunzip 5uym-pdb-bundle.tar.gz
+tar -xvf 5uym-pdb-bundle.tar
+
+process it to make RIBOSOME.pdb:
+-----------------------------------------
+
+grep '^ATOM' 5uym-pdb-bundle1.pdb  > TEMPORARY.pdb
+grep '^ATOM' 5uym-pdb-bundle2.pdb >> TEMPORARY.pdb
+grep '^HETA' 5uym-pdb-bundle1.pdb >> TEMPORARY.pdb
+grep '^HETA' 5uym-pdb-bundle2.pdb >> TEMPORARY.pdb
+
+/home/aelcock/CURRENT_CODES/clean_up_pdb_prior_ahemodel_2019.exe TEMPORARY.pdb TEMPLATE_ahemodel.tmp 5UYM > temp
+/home/aelcock/CURRENT_CODES/keep_only_true_HETATM_entries.exe 5uym-pdb-bundle1.pdb HETATM1.pdb
+/home/aelcock/CURRENT_CODES/keep_only_true_HETATM_entries.exe 5uym-pdb-bundle2.pdb HETATM2.pdb
+cat HETATM1.pdb >> TEMPLATE_ahemodel.tmp
+cat HETATM2.pdb >> TEMPLATE_ahemodel.tmp
+
+make a final RIBOSOME.pdb without nascent chain "(":
+----------------------------------------------------
+
+(note that our nascent chain here is MET 101 of chain "(" - it's a single residue and
+ the "clean_up" code used above converts it from a FME residue and makes it a HETA
+ entry - so the commands used to identify the nascent chain here differ from those
+ used with the other ribosome structures provided here, i.e. 3JBV and 7OIZ)
+
+grep "^ATOM"        TEMPLATE_ahemodel.tmp                      >  RIBOSOME.pdb
+grep "^HETA"        TEMPLATE_ahemodel.tmp | grep -v ".\{21\}(" >> RIBOSOME.pdb
+sed -i 's/^ATOM  /HETATM/' RIBOSOME.pdb
+
+get the nascent chain "(" coordinates in a separate pdb:
+--------------------------------------------------------
+
+(note that we deliberately drop the "CB" atom in case our C-terminal-most residue
+ ends up being a GLY residue later)
+
+grep "^HETA"        TEMPLATE_ahemodel.tmp | grep ".\{21\}(" | grep -v ".\{12\}CB" >  NASCENT_CTERMINUS.pdb
+sed -i 's/HETATM/ATOM  /g' NASCENT_CTERMINUS.pdb
+
+remove temporary files:
+-----------------------
+
+rm TEMP_* SEQRES.tmp temp TEMPORARY.pdb HETATM1.pdb HETATM2.pdb TEMPLATE_ahemodel.tmp
+
