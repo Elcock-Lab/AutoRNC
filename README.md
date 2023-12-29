@@ -8,6 +8,7 @@ If you use this code please cite the following paper:
 "AutoRNC: an automated modeling program for building atomic models of ribosome-nascent chain complexes"
 
 Robert T. McDonnell & Adrian H. Elcock
+
 Structure (in press).
 
 # Installation instructions:
