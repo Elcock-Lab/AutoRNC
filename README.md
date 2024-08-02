@@ -17,8 +17,11 @@ compiling the code:
 -------------------
 
 cd SOURCE/
+
 for i in *.f ; do gfortran $i -o $i.exe ; done
+
 rename .f.exe .exe *exe
+
 cd ..
 
 note that three ribosome templates are provided: 5UYM, 3JBV, 7OIZ
