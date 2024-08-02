@@ -81,3 +81,13 @@ ribosome is that in typical usage one will be making many nascent chain conforma
 so there is no point continually writing out the ribosome coordinates when they will
 be unchanged...
 
+possible issues:
+----------------
+
+(1) The code assumes that the input .fasta file has no more than 60 residues per line, so
+if your sequence contains more than 60 residues you'll need to introduce return statements
+so that the sequence spreads over multiple lines.
+
+(2) The code is very crude in its handling of filenames. It is probably best to stick with
+names for the .fasta and .pdb files that have 6 characters only. The examples all use the 
+filenames P12345.fasta and P12345.pdb so at least this combination is known to work.
