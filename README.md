@@ -89,7 +89,10 @@ possible issues:
 
 (1) The code assumes that the input .fasta file has no more than 60 residues per line, so
 if your sequence contains more than 60 residues you'll need to introduce return statements
-so that the sequence spreads over multiple lines.
+so that the sequence spreads over multiple lines. This can be done easily with the following 
+linux command:
+
+fold -w 60 input.fasta > output.fasta
 
 (2) The code is very crude in its handling of filenames. It is probably best to stick with
 names for the .fasta and .pdb files that have 6 characters only. The examples all use the 
